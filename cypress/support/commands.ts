@@ -9,7 +9,9 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
-//
+import '@testing-library/cypress/add-commands'
+import "cypress-real-events";
+
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
