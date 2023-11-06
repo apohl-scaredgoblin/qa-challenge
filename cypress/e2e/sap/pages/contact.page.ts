@@ -21,6 +21,12 @@ export class ContactPage extends BasePage {
     errorRollup: '.hs_error_rollup',
   };
 
+  errorMessages = {
+    input: 'Please complete this required field.',
+    dropdown: 'Please select an option from the dropdown menu.',
+    summary: 'Please complete all required fields.',
+  };
+
   constructor() {
     super('/contact');
   }
@@ -92,37 +98,33 @@ export class ContactPage extends BasePage {
   public checkErrorMessagePresence(selector: string, text: string) {
     return this.getIframeBody()
       .findByLabelText(selector, { exact: false })
-      .parents('.field')
+      .parents('.field') // added to get to the enclosing div
       .find(this.elements.errorMessage)
       .contains(text)
       .should('exist');
   }
 
-  //Method checks all the required fields and validation errors
   public checkAllErrorMessagesPresence() {
-    const requiredInputText = 'Please complete this required field.';
-    const requiredDropdownText = 'Please select an option from the dropdown menu.';
-
-    this.checkErrorMessagePresence(this.elements.firstNameLabel, requiredInputText);
-    this.checkErrorMessagePresence(this.elements.lastNameLabel, requiredInputText);
-    this.checkErrorMessagePresence(this.elements.workEmaiLabel, requiredInputText);
-    this.checkErrorMessagePresence(this.elements.countryLabel, requiredDropdownText);
-    this.checkErrorMessagePresence(this.elements.howCanHelpLabel, requiredInputText);
-    this.checkErrorMessagePresence(this.elements.marketingCheckboxLabel, requiredInputText);
+    this.checkErrorMessagePresence(this.elements.firstNameLabel, this.errorMessages.input);
+    this.checkErrorMessagePresence(this.elements.lastNameLabel, this.errorMessages.input);
+    this.checkErrorMessagePresence(this.elements.workEmaiLabel, this.errorMessages.input);
+    this.checkErrorMessagePresence(this.elements.countryLabel, this.errorMessages.dropdown);
+    this.checkErrorMessagePresence(this.elements.howCanHelpLabel, this.errorMessages.input);
+    this.checkErrorMessagePresence(this.elements.marketingCheckboxLabel, this.errorMessages.input);
   }
 
   public clickSubmitButton() {
     this.getIframeBody().find(this.elements.submitButton).contains('Submit').click();
   }
 
-  public clickSubmitOnEmptyForm() {
+  public submitEmptyFormAndCheckValidation() {
     this.ensureAllInputsAreEmpty();
     this.ensureAllCheckboxesAreNotChecked();
     this.clickSubmitButton();
     this.checkAllErrorMessagesPresence();
-    this.getIframeBody()
+    this.getIframeBody() // check  presence of summary validation error
       .find(this.elements.errorRollup)
-      .contains('Please complete all required fields.')
+      .contains(this.errorMessages.summary)
       .should('exist');
   }
 }

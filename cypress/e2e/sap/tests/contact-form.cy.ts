@@ -9,19 +9,19 @@ describe('User wants to send a message', () => {
     cy.visit('/');
   });
 
-  it('should show helper texts and the empty form cannot be submitted, when clicking submit button', () => {
-    //The user clicks Get in Touch button on menu
+  it('should show helper texts, when submitting an empty form | clicking get in touch menu button', () => {
+    // The user clicks Get in Touch button on menu
     homePage.clickGetInTouchButtonOnMenu();
     homePage.ensureURLIsCorrect('/contact');
     contactPage.closeAllPopUps();
-    contactPage.clickSubmitOnEmptyForm();
+    contactPage.submitEmptyFormAndCheckValidation();
   });
 
-  it('should show helper texts and the empty form cannot be submitted, when clicking submit button', () => {
-    //The user clicks Get in Touch button under menu
+  it('should show helper texts, when submitting an empty form | clicking get in touch contents button', () => {
+    // The user clicks Get in Touch button under menu
     homePage.clickGetInTouchButtonUnderMenu();
     homePage.ensureURLIsCorrect('/contact');
     contactPage.closeAllPopUps();
-    contactPage.clickSubmitOnEmptyForm();
+    contactPage.submitEmptyFormAndCheckValidation();
   });
 });
