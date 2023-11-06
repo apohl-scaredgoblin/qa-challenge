@@ -3,14 +3,12 @@
 ## Prerequisite
 
 - Node v16+
-- Cypress v13+
 
 ## Install
 
 - `npm install` - install dependencies
-- `npm install cypress --save-dev` - install cypress
 
-## Environment
+## Important
 
 By default application will run on `https://www.sapfioneer.com/`
 
@@ -37,4 +35,4 @@ Use any of the following commands:
 - `npm run cy:run:firefox`
 - `npm run cy:run:edge`
 
-The command run complete set of tests and generate report with Mochawesome generator. It will be added to `/cypress/reports/` directory.
+The command runs a complete set of tests and generate report with Mochawesome generator. It will be added to `/cypress/reports/` directory.
