@@ -60,7 +60,7 @@ export class ContactPage extends BasePage {
   };
 
   public closeAllPopUps() {
-    cy.get(this.elements.popupExitButton).click();
+    //cy.get(this.elements.popupExitButton).click();
     cy.get(this.elements.acceptCookiesButton).click();
   }
 

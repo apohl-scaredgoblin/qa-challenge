@@ -9,6 +9,7 @@ export default defineConfig({
     json: true,
   },
   e2e: {
+    "chromeWebSecurity": false,
     baseUrl: "https://www.sapfioneer.com/",
     },
 });
